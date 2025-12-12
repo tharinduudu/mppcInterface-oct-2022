@@ -4,8 +4,8 @@ echo "Copying files to Phy2 server"
 source_dir_muon_data="/home/cosmic/mppcinterface-oct-2022/firmware/libraries/slowControl"
 source_dir_press_data="/home/cosmic/bmp280_logs"
 
-dest_dir_muon_data="/home/dsk3/xiaochun/Cosmic/Turkey/Turkey_Obs/muonData"
-dest_dir_press_data="/home/dsk3/xiaochun/Cosmic/Turkey/Turkey_Obs/prsData"
+dest_dir_muon_data="/home/dsk3/xiaochun/Cosmic/Colombo/Colombo2/muonData"
+dest_dir_press_data="/home/dsk3/xiaochun/Cosmic/Colombo/Colombo2/prsData"
 
 source_host="131.96.55.85"
 check_string="log"
