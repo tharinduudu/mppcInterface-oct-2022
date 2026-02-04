@@ -82,8 +82,24 @@ have_node /dev/i2c-1   && I2C_OK=1
 log "SPI now: $([[ $SPI_OK -eq 1 ]] && echo PRESENT || echo MISSING)  |  I2C now: $([[ $I2C_OK -eq 1 ]] && echo PRESENT || echo MISSING)"
 
 log "Fetch repo content to ${USER_HOME} (detector folder + bmp280.py)"
-sudo -u "${USER_NAME}" bash -lc 'cd ~ && curl -L https://github.com/tharinduudu/mppcInterface/archive/refs/heads/main.tar.gz \
-  | tar -xz -f - --strip-components=1 mppcInterface-main/mppcinterface-oct-2022 mppcInterface-main/bmp280.py'
+sudo -u "${USER_NAME}" bash -lc '
+set -e
+cd ~
+TAR_URL="https://github.com/tharinduudu/mppcInterface-oct-2022/archive/refs/heads/main.tar.gz"
+TMP="$(mktemp /tmp/mppcInterface.XXXXXX.tar.gz)"
+
+curl -L "$TAR_URL" -o "$TMP"
+
+# Detect the top folder name inside the archive (e.g., mppcInterface-oct-2022-main)
+TOP="$(tar -tzf "$TMP" | head -1 | cut -d/ -f1)"
+
+# Extract exactly what we need into ~/
+tar -xzf "$TMP" --strip-components=1 -C "$HOME" \
+  "$TOP/mppcinterface-oct-2022" \
+  "$TOP/bmp280.py"
+
+rm -f "$TMP"
+'
 
 log "Install WiringPi from source"
 sudo -u "${USER_NAME}" bash -lc 'cd ~ && rm -rf WiringPi && git clone --depth=1 https://github.com/WiringPi/WiringPi.git'
