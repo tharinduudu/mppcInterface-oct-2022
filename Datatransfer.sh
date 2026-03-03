@@ -1,7 +1,7 @@
 #Japan Data Transfer Script to GSU Phys2 Server
 
 echo "Copying files to Phy2 server"
-source_dir_muon_data="/home/cosmic/mppcinterface-oct-2022/firmware/libraries/slowControl"
+source_dir_muon_data="/home/cosmic/mppcInterface/firmware/libraries/slowControl"
 source_dir_press_data="/home/cosmic/bmp280_logs"
 
 dest_dir_muon_data="/home/dsk3/xiaochun/Cosmic/Colombo/Colombo2/muonData"
